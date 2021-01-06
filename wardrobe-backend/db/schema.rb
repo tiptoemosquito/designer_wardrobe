@@ -19,9 +19,8 @@ ActiveRecord::Schema.define(version: 2021_01_05_205943) do
   end
 
   create_table "designers", force: :cascade do |t|
-    t.string "type"
+    t.string "name"
     t.integer "price"
-    t.string "image"
     t.integer "quantity"
     t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
