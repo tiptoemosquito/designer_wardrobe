@@ -1,3 +1,3 @@
 class Category < ApplicationRecord
-    belongs_to :designer
+    has_many :designers
 end

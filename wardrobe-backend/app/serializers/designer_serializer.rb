@@ -1,4 +1,4 @@
 class DesignerSerializer < ActiveModel::Serializer
   attributes :id, :name
-  has_many :categories
+  belongs_to :category
 end

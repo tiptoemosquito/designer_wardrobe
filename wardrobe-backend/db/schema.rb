@@ -13,17 +13,17 @@
 ActiveRecord::Schema.define(version: 2021_01_05_205943) do
 
   create_table "categories", force: :cascade do |t|
-    t.string "type"
-    t.integer "price"
-    t.integer "designer_id"
-    t.string "image"
-    t.integer "quantity"
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "designers", force: :cascade do |t|
-    t.string "name"
+    t.string "type"
+    t.integer "price"
+    t.string "image"
+    t.integer "quantity"
+    t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
