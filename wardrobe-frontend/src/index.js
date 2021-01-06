@@ -82,3 +82,81 @@ async function addDesigner(e) {
     clearForm()
     e.target.style.display = "none"
 }
+
+function attachClicks() {
+    const designers = document.querySelectorAll("li a")
+    designers.forEach(designer => {
+        designer.addEventListener('click', displayDesigner)
+    })
+}
+
+function attachClicksLib() {
+    const categories = document.querySelectorAll("li a")
+    categories.forEach(cat => {
+        cat.addEventListener('click', displayCategory)
+    })
+}
+
+async function displayDesigner(e) {
+    let id = e.target.dataset.id
+    const data = await apiService.fetchDesigner(id)
+    const designer = new Designer(data)
+    main.innerHTML = designer.renderDesigner()
+    document.getElementById('delete-designer').addEventListener('click', removeDesigner)
+}
+
+async function displayCategory(e) {
+    let id = e.target.dataset.id
+    const data = await apiService.fetchCategory(id)
+    const lib = new Category(data)
+    main.innerHTML = lib.renderCategory()
+    if (lib.designers) {
+        lib.designers.forEach(designer => {
+            main.innerHTML += `
+            <li><a href="#" data-id="${designer.id}">${designer.name}</a></li>
+            <br>
+            `
+        })
+    }
+    document.getElementById('add-designer-form').addEventListener('click', () => displayCreateForm(id))
+    attachClicks()
+}
+
+async function addCategory(e) {
+    e.preventDefault()
+    let main = document.getElementById("main")
+    let category = {
+        name: e.target.querySelector("#name").value
+    }
+    let data = await apiService.fetchAddCategory(category)
+    let newCategory = new Category(data)
+    main.innerHTML += newCategory.renderCategories()
+    attachClicksLib()
+    clearForm()
+}
+
+function displayCreateCatForm() {
+    main.innerHTML = ""
+    document.getElementById("new-designer-form").innerHTML = ""
+    let formDiv = document.querySelector("#new-category-form")
+    let html = `
+    <form>
+    <label>Name: </label>
+    <input type="text" id="name"><br>
+    <br>
+    <input type="submit">
+    </form>
+    `
+    formDiv.innerHTML = html 
+    document.querySelector('form').addEventListener('submit', addCategory)
+}
+
+async function removeDesigner(e) {
+    let id = e.target.dataset.id
+    const data = await apiService.fetchRemoveDesigner(id)
+    .then(data => {
+        renderDesigners()
+    })
+}
+
+init()
