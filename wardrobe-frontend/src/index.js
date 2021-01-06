@@ -49,8 +49,8 @@ function displayCreateForm(id) {
     <label>Price: </label>
     <input type="text" id="price"><br>
     <br>
-    <label>Quantity: </label>
-    <input type="text" id="quantity"><br>
+    <label>Leather? </label>
+    <input type="checkbox" id="leather_textile"><br>
     <br>
     <input type="submit">
     </form>
@@ -73,7 +73,7 @@ async function addDesigner(e) {
         category_id: e.target.querySelector("#category-id").value,
         name: e.target.querySelector("#name").value,
         price: e.target.querySelector("#price").value,
-        quantity: e.target.querySelector("#quantity").value
+        leather_textile: e.target.querySelector("#leather_textile").value
     }
     let data = await apiService.fetchAddDesigner(designer)
     let newDesigner = new Designer(data)

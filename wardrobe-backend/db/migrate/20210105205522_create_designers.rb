@@ -3,7 +3,7 @@ class CreateDesigners < ActiveRecord::Migration[6.0]
     create_table :designers do |t|
       t.string :name
       t.integer :price
-      t.integer :quantity
+      t.boolean :leather_textile
       t.integer :category_id
       t.timestamps
     end
