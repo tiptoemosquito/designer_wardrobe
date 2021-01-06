@@ -6,4 +6,13 @@ class Category {
         this.render()
         this.attachEventListener()
     }
+
+    static getAll(){
+        api.getAllCategories().then((data) =>
+        data.forEach((category) => new Category(category)))
+    }
+
+    //render(){
+    
+    //}
 }
