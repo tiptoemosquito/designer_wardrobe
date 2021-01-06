@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2021_01_05_205943) do
     t.integer "price"
     t.integer "designer_id"
     t.string "image"
-    t.string "textile"
+    t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

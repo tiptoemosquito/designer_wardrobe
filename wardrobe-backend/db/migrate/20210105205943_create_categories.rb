@@ -5,7 +5,7 @@ class CreateCategories < ActiveRecord::Migration[6.0]
       t.integer :price
       t.integer :designer_id
       t.string :image
-      t.string :textile
+      t.integer :quantity
 
       t.timestamps
     end
