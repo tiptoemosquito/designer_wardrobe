@@ -18,7 +18,7 @@ class Category {
         return `
         <h3>${this.name}</h3>
         <br>
-        <button type="button" id="add-designer-form">Add Designer</book>
+        <button type="button" id="add-designer-form">Add Designer</button>
         <br>
         `
     }

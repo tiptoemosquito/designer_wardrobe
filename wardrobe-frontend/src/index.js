@@ -8,11 +8,11 @@ const init = () => {
 
 function addEventListeners() {
     document.getElementById('designers').addEventListener('click', renderDesigners)
-    document.getElementById('category-form').addEventListener('click', displayCreateDesignerForm)
+    document.getElementById('category-form').addEventListener('click', displayCreateCatForm)
     document.getElementById('categories').addEventListener('click', renderCategories)
 }
 
-async function renderDesigner() {
+async function renderDesigners() {
     document.getElementById("new-category-form").innerHTML = ""
     document.getElementById("new-designer-form").innerHTML = ""
     const designers = await apiService.fetchDesigners() 
@@ -33,7 +33,7 @@ async function renderCategories() {
         const newCategory = new Category(cat)
         main.innerHTML += newCategory.renderCategories() 
     })
-    attachClicksLib()
+    attachClicksCat()
 }
 
 function displayCreateForm(id) {
@@ -61,9 +61,9 @@ function displayCreateForm(id) {
 
 function clearForm() {
     let formDiv = document.querySelector("#new-designer-form")
-    let formDivLib = document.querySelector("#new-category-form")
+    let formDivCat = document.querySelector("#new-category-form")
     formDiv.innerHTML = ""
-    formDivLib.innerHTML = ""
+    formDivCat.innerHTML = ""
 }
 
 async function addDesigner(e) {
@@ -108,10 +108,10 @@ async function displayDesigner(e) {
 async function displayCategory(e) {
     let id = e.target.dataset.id
     const data = await apiService.fetchCategory(id)
-    const lib = new Category(data)
-    main.innerHTML = lib.renderCategory()
-    if (lib.designers) {
-        lib.designers.forEach(designer => {
+    const cat = new Category(data)
+    main.innerHTML = cat.renderCategory()
+    if (cat.designers) {
+        cat.designers.forEach(designer => {
             main.innerHTML += `
             <li><a href="#" data-id="${designer.id}">${designer.name}</a></li>
             <br>
@@ -131,7 +131,7 @@ async function addCategory(e) {
     let data = await apiService.fetchAddCategory(category)
     let newCategory = new Category(data)
     main.innerHTML += newCategory.renderCategories()
-    attachClicksLib()
+    attachClicksCat()
     clearForm()
 }
 

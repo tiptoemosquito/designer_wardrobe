@@ -18,7 +18,14 @@ class Designer {
 
     renderDesigner() {
         return `
-        
+        <h3>${this.name}</h3>
+        <p>${this.price}</p>
+        <hr>
+        <br>
+        <p>${this.category.name}</p>
+        <p>${this.leather_text ? "Leather" : "Not Leather"}</p>
+        <br>
+        <button id="delete-designer" data-id="${this.id}">Delete Designer</button>
         `
     }
 }

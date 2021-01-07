@@ -5,7 +5,7 @@ class DesignersController < ApplicationController
   def index
     @designers = Designer.all
 
-    render json: @designers
+    render json: designers
   end
 
   # GET /designers/1
