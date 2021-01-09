@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_01_05_205943) do
   end
 
   create_table "designers", force: :cascade do |t|
-    t.string "name"
+    t.string "description"
     t.integer "price"
     t.boolean "leather_textile"
     t.integer "category_id"

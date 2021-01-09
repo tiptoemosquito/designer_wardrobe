@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories
   def index
-    @categories = Category.all
+    categories = Category.all
 
     render json: categories
   end
@@ -25,18 +25,18 @@ class CategoriesController < ApplicationController
   end
 
   # PATCH/PUT /categories/1
-  def update
-    if @category.update(category_params)
-      render json: @category
-    else
-      render json: @category.errors, status: :unprocessable_entity
-    end
-  end
+  # def update
+  #   if @category.update(category_params)
+  #     render json: @category
+  #   else
+  #     render json: @category.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # DELETE /categories/1
-  def destroy
-    @category.destroy
-  end
+  # def destroy
+  #   @category.destroy
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -46,6 +46,6 @@ class CategoriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def category_params
-      params.require(:category).permit(:type, :price, :designer_integer, :image, :textile)
+      params.require(:category).permit(:name)
     end
 end

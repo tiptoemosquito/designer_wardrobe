@@ -5,10 +5,4 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-boots = Category.create(name: "Boots")
-heels = Category.create(name: "Heels")
-sneakers = Category.create(name: "Sneakers")
 
-Designer.create(name: "Gucci xxmm Frances Matelasse Chelsea Boot", price: 890, leather_textile: true)
-Designer.create(name: "Salvatore Ferragamo Violet Sandal", price: 695, leather_textile: false)
-Designer.create(name: "Elyse Star Platform Derby STELLA MCCARTNEY", price: 1035, leather_textile: false)

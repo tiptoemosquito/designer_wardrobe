@@ -1,4 +1,4 @@
 class CategorySerializer < ActiveModel::Serializer
-  attributes :id, :type, :price, :image, :textile
+  attributes :id, :name
   has_many :designers
 end

@@ -3,7 +3,7 @@ class DesignersController < ApplicationController
 
   # GET /designers
   def index
-    @designers = Designer.all
+    designers = Designer.all
 
     render json: designers
   end
@@ -25,13 +25,13 @@ class DesignersController < ApplicationController
   end
 
   # PATCH/PUT /designers/1
-  def update
-    if @designer.update(designer_params)
-      render json: @designer
-    else
-      render json: @designer.errors, status: :unprocessable_entity
-    end
-  end
+  # def update
+  #   if @designer.update(designer_params)
+  #     render json: @designer
+  #   else
+  #     render json: @designer.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # DELETE /designers/1
   def destroy
@@ -46,6 +46,6 @@ class DesignersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def designer_params
-      params.require(:designer).permit(:name, :name)
+      params.require(:designer).permit(:description, :price, :leather_textile, :category_id)
     end
 end
