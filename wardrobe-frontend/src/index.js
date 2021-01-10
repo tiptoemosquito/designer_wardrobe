@@ -8,7 +8,7 @@ const init = () => {
 
 function addEventListeners() {
     document.getElementById('designers').addEventListener('click', renderDesigners)
-    document.getElementById('category-form').addEventListener('click', displayCreateCatForm)
+    document.getElementById('category-form').addEventListener('click', displayCreateCategoryForm)
     document.getElementById('categories').addEventListener('click', renderCategories)
 }
 
@@ -27,13 +27,13 @@ async function renderDesigners() {
 async function renderCategories() {
     document.getElementById("new-category-form").innerHTML = ""
     document.getElementById("new-designer-form").innerHTML = ""
-    const cats= await apiService.fetchCategories()
+    const categories = await apiService.fetchCategories()
     main.innerHTML = ""
-    cats.map(cat => {
-        const newCategory = new Category(cat)
+    categories.map(category => {
+        const newCategory = new Category(category)
         main.innerHTML += newCategory.renderCategories() 
     })
-    attachClicksCat()
+    attachClicksCategory()
 }
 
 function displayCreateForm(id) {
@@ -43,8 +43,8 @@ function displayCreateForm(id) {
     let html = `
     <form>
     <input type="hidden" id="category-id" value="${id}">
-    <label>Name: </label>
-    <input type="text" id="name"><br>
+    <label>Description: </label>
+    <input type="text" id="description"><br>
     <br>
     <label>Price: </label>
     <input type="text" id="price"><br>
@@ -71,7 +71,7 @@ async function addDesigner(e) {
     let main = document.getElementById("main")
     let designer = {
         category_id: e.target.querySelector("#category-id").value,
-        name: e.target.querySelector("#name").value,
+        description: e.target.querySelector("#description").value,
         price: e.target.querySelector("#price").value,
         leather_textile: e.target.querySelector("#leather_textile").value
     }
@@ -90,10 +90,10 @@ function attachClicks() {
     })
 }
 
-function attachClicksLib() {
+function attachClicksCategory() {
     const categories = document.querySelectorAll("li a")
-    categories.forEach(cat => {
-        cat.addEventListener('click', displayCategory)
+    categories.forEach(category => {
+        category.addEventListener('click', displayCategory)
     })
 }
 
@@ -108,12 +108,12 @@ async function displayDesigner(e) {
 async function displayCategory(e) {
     let id = e.target.dataset.id
     const data = await apiService.fetchCategory(id)
-    const cat = new Category(data)
-    main.innerHTML = cat.renderCategory()
-    if (cat.designers) {
-        cat.designers.forEach(designer => {
+    const category = new Category(data)
+    main.innerHTML = category.renderCategory()
+    if (category.designers) {
+        category.designers.forEach(designer => {
             main.innerHTML += `
-            <li><a href="#" data-id="${designer.id}">${designer.name}</a></li>
+            <li><a href="#" data-id="${designer.id}">${designer.description}</a></li>
             <br>
             `
         })
@@ -131,11 +131,11 @@ async function addCategory(e) {
     let data = await apiService.fetchAddCategory(category)
     let newCategory = new Category(data)
     main.innerHTML += newCategory.renderCategories()
-    attachClicksCat()
+    attachClicksCategory()
     clearForm()
 }
 
-function displayCreateCatForm() {
+function displayCreateCategoryForm() {
     main.innerHTML = ""
     document.getElementById("new-designer-form").innerHTML = ""
     let formDiv = document.querySelector("#new-category-form")
@@ -155,7 +155,7 @@ async function removeDesigner(e) {
     let id = e.target.dataset.id
     const data = await apiService.fetchRemoveDesigner(id)
     .then(data => {
-        renderDesigners()
+        renderDesigners(data)
     })
 }
 
